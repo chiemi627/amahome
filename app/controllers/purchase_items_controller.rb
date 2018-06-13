@@ -1,10 +1,13 @@
 class PurchaseItemsController < ApplicationController
+
+  protect_from_forgery except: :add
+
   def list
   end
 
   def add
-    if params[:result]!=nil then
-      goods = params[:result][:parameters][:goods]
+    if params[:queryResult]!=nil then
+      goods = params[:queryResult][:parameters][:goods]
     else
       goods = "おむつ"
     end
