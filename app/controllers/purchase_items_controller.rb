@@ -3,6 +3,7 @@ class PurchaseItemsController < ApplicationController
   protect_from_forgery except: :add
 
   def list
+    @items = Item.all
   end
 
   def add
@@ -11,18 +12,9 @@ class PurchaseItemsController < ApplicationController
     else
       goods = "おむつ"
     end
+    new_item = Item.new(name:goods)
+    new_item.save
     speech_str = "#{goods}を追加しました"
-    msg = {
-      :speech => speech_str,
-      :displayText => speech_str,
-      :data => {
-        :google => {
-          :expectUserResponse => false,
-          :isSsml => false,
-        }
-      },
-      :source => "(-_-)",
-    }
 
     msg = {
       fulfillmentText: speech_str

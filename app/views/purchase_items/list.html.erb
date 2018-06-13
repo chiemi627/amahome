@@ -1,2 +1,9 @@
-<h1>PurchaseItems#list</h1>
-<p>Find me in app/views/purchase_items/list.html.erb</p>
+<h1>Amagasa's home to-buy list</h1>
+
+<ul class="item">
+  <% @items.each do |item| %>
+    <li>
+    <%= item.name %> (<%= item.created_at %>)
+    </li>
+  <% end %>
+</ul>
