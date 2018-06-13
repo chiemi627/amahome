@@ -1,4 +1,7 @@
 class PurchaseItemsController < ApplicationController
+
+  protect_from_forgery except: :add
+
   def list
   end
 
