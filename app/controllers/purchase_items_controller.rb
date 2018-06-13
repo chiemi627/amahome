@@ -24,6 +24,10 @@ class PurchaseItemsController < ApplicationController
       :source => "(-_-)",
     }
 
+    msg = {
+      fullfillmentText: speech_str
+    }
+
     respond_to do |format|
       format.json  { render json: msg }
     end
