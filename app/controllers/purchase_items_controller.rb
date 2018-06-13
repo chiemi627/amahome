@@ -25,7 +25,7 @@ class PurchaseItemsController < ApplicationController
     }
 
     msg = {
-      fullfillmentText: speech_str
+      fulfillmentText: speech_str
     }
 
     respond_to do |format|
