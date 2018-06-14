@@ -2,8 +2,6 @@ version: '3'
 services:
   db:
     image: postgres
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRESQL_DATABASE_PASSWORD: ${POSTGRESQL_DATABASE_PASSWORD}
   web:
