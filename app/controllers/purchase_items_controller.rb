@@ -1,5 +1,6 @@
 class PurchaseItemsController < ApplicationController
 	require 'line/bot'
+  require 'net/https'
 
   protect_from_forgery except: [:add, :list, :agent, :callback]
 
@@ -88,6 +89,16 @@ class PurchaseItemsController < ApplicationController
     else
       speech_str = "買うものがなかったので送ってないです"
     end
+  
+    uri = URI.parse("https://hooks.todobot.io/iRliKmeGrg")
+    http = Net::HTTP.new(uri.host, uri.port)
+
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    req = Net::HTTP::Post.new(uri.path)
+    req.set_form_data({text: message})
+    res = http.request(req)
     
     respond_to do |format|
       format.html
