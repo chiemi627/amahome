@@ -27,7 +27,7 @@ class PurchaseItemsController < ApplicationController
 		else	
       list_str = @items.map{|item| item.name}.join('と、')
       if mode=="welcome" then
-        speech_str = "今リストにあるのは"+list_str+"です。"
+        speech_str = "こんにちは。いまお買い物リストにあるのは"+list_str+"です。"
       elsif mode=="show" then
 			  speech_str = list_str+"を買ってきてね。"
       end
