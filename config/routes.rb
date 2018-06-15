@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   get '/add', to: 'purchase_items#add'
 	post '/agent(.:format)', to: 'purchase_items#agent'
 
+	post '/callback', to: 'purchase_items#callback'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
