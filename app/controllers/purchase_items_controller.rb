@@ -17,7 +17,7 @@ class PurchaseItemsController < ApplicationController
 		if @items.length == 0 then
 			speech_str = "買い物リストは空だよ"
 		else	
-      speech_str = @items.join('と')+"を買ってきてね"
+			speech_str = @items.map{|item| item.name}.join('と')+"を買ってきてね"
     end
 
 		msg = {
