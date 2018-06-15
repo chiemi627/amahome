@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 	get '/list', to: 'purchase_items#list'
   get '/add', to: 'purchase_items#add'
 	post '/agent(.:format)', to: 'purchase_items#agent'
-
 	get '/callback', to: 'purchase_items#callback'
 	post '/callback', to: 'purchase_items#callback'
 
