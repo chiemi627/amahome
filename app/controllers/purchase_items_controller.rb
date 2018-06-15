@@ -14,7 +14,7 @@ class PurchaseItemsController < ApplicationController
 
   def list
     @items = Item.all
-		if @item.length == 0 then
+		if @items.length == 0 then
 			speech_str = "買い物リストは空だよ"
 		else	
       speech_str = @items.join('と')+"を買ってきてね"
