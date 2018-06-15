@@ -51,6 +51,12 @@ class PurchaseItemsController < ApplicationController
 			item.done = true
 			item.save
 		}	
+    speech_str = "#{goods}買ってきてくれて、ありがとう"
+
+		respond_to do |format|
+			format.json { render json: {fulfillmentText: speech_str}}
+		end
+
 	end
 
 end
