@@ -85,7 +85,13 @@ class PurchaseItemsController < ApplicationController
       }
       response = client.push_message(user_id, message)
       head :ok
+      speech_str = "LINEに買い物リスト送りました"
+    else
+      speech_str = "買うものがなかったので送ってないです"
     end
-	end
-
+    
+    respond_to do |format|
+      format.json { render json: {fulfillmentText: speech_str}}
+    end
+  end
 end
