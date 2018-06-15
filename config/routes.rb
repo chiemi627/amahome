@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'purchase_items/del_item'
+
 	root 'purchase_items#list'
 
 	get '/list', to: 'purchase_items#list'

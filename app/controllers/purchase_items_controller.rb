@@ -60,6 +60,10 @@ class PurchaseItemsController < ApplicationController
 
 	end
 
+  def del_item(id)
+    Item.find(id).destroy
+  end
+
   def client
     @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
