@@ -11,6 +11,8 @@ class PurchaseItemsController < ApplicationController
 				list()
 			elsif params[:queryResult][:action]=="bought" then
 				bought(params[:queryResult][:parameters][:goods])
+      elsif params[:queryResult][:action]=="send_list" then
+        callback()
 			end
 		end
 	end	
@@ -52,7 +54,7 @@ class PurchaseItemsController < ApplicationController
 			item.done = true
 			item.save
 		}	
-    speech_str = "#{goods}買ってきてくれて、ありがとう"
+    speech_str = "#{goods}を買ってきてくれて、ありがとう"
 
 		respond_to do |format|
 			format.json { render json: {fulfillmentText: speech_str}}
@@ -72,18 +74,22 @@ class PurchaseItemsController < ApplicationController
   end
 
   def callback
-    body = request.body.read
+    @items = Item.where(done: false)
+    if @items > 0 then
+      message = "[買い物リスト] "+@items.map{|item| item.name}.join(", ")
 
-    signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
-      error 400 do 'Bad Request' end
-    end
+      body = request.body.read
 
-    user_id = 'C05a7b2b6d2bd4891101d8638bb8f8f91'
-    message = {
-      type: 'text',
-      text: 'Hello, world'
-    }
+      signature = request.env['HTTP_X_LINE_SIGNATURE']
+      unless client.validate_signature(body, signature)
+        error 400 do 'Bad Request' end
+      end
+
+      user_id = 'C05a7b2b6d2bd4891101d8638bb8f8f91'
+      message = {
+        type: 'text',
+        text: message
+      }
     response = client.push_message(user_id, message)
     head :ok
 	end
