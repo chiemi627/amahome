@@ -5,7 +5,7 @@ class PurchaseItemsController < ApplicationController
   def agent
     if params[:queryResult]!=nil then
       if params[:queryResult][:action]=="add_item"
-				add(params)
+				add(params[:queryResult][:parameters][:goods])
 		  elsif params[:queryResult][:action]=="show_list"
 				list()
 			end
@@ -29,12 +29,7 @@ class PurchaseItemsController < ApplicationController
 		end	
   end
 
-  def add
-    if params[:queryResult]!=nil then
-      goods = params[:queryResult][:parameters][:goods]
-    else
-      goods = "おむつ"
-    end
+  def add(goods)
     new_item = Item.new(name:goods)
     new_item.save
     speech_str = "#{goods}を追加したよ"
