@@ -90,8 +90,9 @@ class PurchaseItemsController < ApplicationController
         type: 'text',
         text: message
       }
-    response = client.push_message(user_id, message)
-    head :ok
+      response = client.push_message(user_id, message)
+      head :ok
+    end
 	end
 
 end
