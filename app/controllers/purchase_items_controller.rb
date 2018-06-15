@@ -4,10 +4,12 @@ class PurchaseItemsController < ApplicationController
 
   def agent
     if params[:queryResult]!=nil then
-      if params[:queryResult][:action]=="add_item"
+      if params[:queryResult][:action]=="add_item" then
 				add(params[:queryResult][:parameters][:goods])
-		  elsif params[:queryResult][:action]=="show_list"
+		  elsif params[:queryResult][:action]=="show_list" then
 				list()
+			elsif params[:queryResult][:action]=="bought" then
+				bought(params[:queryResult][:parameters][:goods])
 			end
 		end
 	end	
@@ -25,6 +27,7 @@ class PurchaseItemsController < ApplicationController
 		}
 
 		respond_to do |format|
+			format.html
 			format.json { render json: msg }
 		end	
   end
@@ -42,4 +45,12 @@ class PurchaseItemsController < ApplicationController
       format.json  { render json: msg }
     end
   end
+
+  def bought(goods)
+		Item.where(name: goods).map { |item|
+			item.done = true
+			item.save
+		}	
+	end
+
 end
