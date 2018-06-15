@@ -6,9 +6,9 @@ class PurchaseItemsController < ApplicationController
     @items = Item.all
 		if @item.length == 0 then
 			speech_str = "買い物リストは空だよ"
-			
-    speech_str = @items.join("と")+"を買ってきてね"
-
+		else	
+      speech_str = @items.join('と')+"を買ってきてね"
+    end
 
 		msg = {
 			fulfillmentText: speech_str
@@ -17,7 +17,6 @@ class PurchaseItemsController < ApplicationController
 		respond_to do |format|
 			format.json { render json: msg }
 		end	
-
   end
 
   def add
