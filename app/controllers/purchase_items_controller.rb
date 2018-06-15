@@ -75,7 +75,7 @@ class PurchaseItemsController < ApplicationController
 
   def callback
     @items = Item.where(done: false)
-    if @items > 0 then
+    if @items.length > 0 then
       message = "[買い物リスト] "+@items.map{|item| item.name}.join(", ")
 
       body = request.body.read
