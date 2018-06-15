@@ -1,6 +1,17 @@
 class PurchaseItemsController < ApplicationController
 
-  protect_from_forgery except: :add
+  protect_from_forgery except: [:add, :list, :agent]
+
+  def agent
+    if params[:queryResult]!=nil then
+      if params[:queryResult][:action]=="add_item"
+				add(params)
+		  elsif params[:queryResult][:action]=="show_list"
+				list()
+			end
+		end
+		end	
+	end	
 
   def list
     @items = Item.all
