@@ -10,7 +10,6 @@ class PurchaseItemsController < ApplicationController
 				list()
 			end
 		end
-		end	
 	end	
 
   def list
