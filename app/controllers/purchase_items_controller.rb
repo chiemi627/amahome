@@ -78,13 +78,6 @@ class PurchaseItemsController < ApplicationController
     if @items.length > 0 then
       message = "[買い物リスト] "+@items.map{|item| item.name}.join(", ")
 
-      body = request.body.read
-
-      signature = request.env['HTTP_X_LINE_SIGNATURE']
-      unless client.validate_signature(body, signature)
-        error 400 do 'Bad Request' end
-      end
-
       user_id = 'C05a7b2b6d2bd4891101d8638bb8f8f91'
       message = {
         type: 'text',
