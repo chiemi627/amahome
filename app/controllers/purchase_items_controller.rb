@@ -15,7 +15,7 @@ class PurchaseItemsController < ApplicationController
 	end	
 
   def list
-    @items = Item.all
+    @items = Item.where(done:false)
 		if @items.length == 0 then
 			speech_str = "買い物リストは空だよ"
 		else	
