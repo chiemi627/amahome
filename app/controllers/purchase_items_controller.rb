@@ -79,22 +79,12 @@ class PurchaseItemsController < ApplicationController
       error 400 do 'Bad Request' end
     end
 
-    events = client.parse_events_from(body)
-
-    events.each { |event|
-      case event
-      when Line::Bot::Event::Message
-        case event.type
-        when Line::Bot::Event::MessageType::Text
-          message = {
-            type: 'text',
-            text: event.message['text']
-          }
-          client.reply_message(event['replyToken'], message)
-        end
-      end
+    user_id = 'C05a7b2b6d2bd4891101d8638bb8f8f91'
+    message = {
+      type: 'text',
+      text: 'Hello, world'
     }
-
+    response = client.push_message(user_id, message)
     head :ok
 	end
 
