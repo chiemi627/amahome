@@ -9,18 +9,22 @@ class PurchaseItemsController < ApplicationController
       if params[:queryResult][:action]=="add_item" then
 				add(params[:queryResult][:parameters][:goods])
 		  elsif params[:queryResult][:action]=="show_list" then
-				list("show")
+			  show_list("show")
 			elsif params[:queryResult][:action]=="bought" then
 				bought(params[:queryResult][:parameters][:goods])
       elsif params[:queryResult][:action]=="send_list" then
         callback()
       elsif params[:queryResult][:action]=="input.welcome" then
-        list("welcome")
+        show_list("welcome")
 			end
 		end
 	end	
 
-  def list(mode)
+  def list
+    show_list("show")
+  end
+
+  def show_list(mode)
     @items = Item.where(done:false)
 		if @items.length == 0 then
 			speech_str = "買い物リストは空です。"
